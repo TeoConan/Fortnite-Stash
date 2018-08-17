@@ -1,0 +1,33 @@
+#Redirect WWW/ADMIN/_TEST
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^fortnite-stash.local
+RewriteCond %{REQUEST_URI} !^/www/
+RewriteRule (.*) http://www.fortnite-stash.local/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^admin\.fortnite-stash.local
+RewriteCond %{REQUEST_URI} !^/admin/
+RewriteRule (.*) /admin/$1
+
+RewriteCond %{HTTP_HOST} ^www\.fortnite-stash.local
+RewriteCond %{REQUEST_URI} !^/www/
+RewriteRule (.*) /www/$1
+
+RewriteCond %{HTTP_HOST} ^test\.fortnite-stash.local
+RewriteCond %{REQUEST_URI} !^/_test/
+RewriteRule (.*) /_test/$1
+
+#Image
+RewriteRule image\.php$ - 
+RewriteRule ^\/([^\/]+)\/(.+)\/(.+\.(png|jpg|gif|svg))$ redirect.php?type=image&from=$1&full=$0&path=$2&file=$3&format=$4&%{QUERY_STRING}
+
+#CSS
+RewriteRule ^\/([^\/]+)\/(.+)\/(.+\.(css))$ redirect.php?type=css&from=$1&full=$0&path=$2&file=$3&format=$4
+
+#DirectoryIndex www/index.php /system/errors/403.php
+
+#ErrorDocument 403 /erreurs/erreur_403.php
+#ErrorDocument 404 /system/errors/404.php
+
+#Save image
+#RewriteRule ^\/([^\/]+)\/(.+)\/(.+\.(png|jpg|gif|svg))$ redirect.php?type=image&from=$1&full=$0&path=$2&file=$3&format=$4

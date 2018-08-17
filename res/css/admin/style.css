@@ -1,0 +1,125 @@
+@import url('/res/css/reset.css');
+@import url('/res/css/common.css');
+@import url('/res/css/admin/nav.css');
+
+
+/* Common page */
+.block-main > .inner {
+	padding: 25px;
+	max-width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	width: 100%;
+}
+
+
+
+/**
+ *	Login
+**/
+
+.page-login {
+	height: 100vh;
+	width: 100vw;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	
+	background-image: url(/res/images/admin/stash-background.jpg);
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: cover;
+}
+
+.block-login {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+}
+
+.block-login .separator {
+	background-color: #b0bec5;
+}
+
+/* Logo */
+
+.block-login .logo {
+	display: flex;
+	margin-bottom: 75px;
+}
+
+.block-login .admin-logo {
+	height: 100px;
+	margin: auto;
+}
+
+/* Form */
+
+form.login {
+	width: 275px;
+}
+
+/* Inputs */
+
+.login-input {
+	padding: 5px 10px;
+	margin: 10px 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.login-input > label {
+	color: #b0bec5;
+	font-size: 0.6rem;
+	font-family: Myriad Pro;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-weight: 100;
+	margin-bottom: 5px;
+}
+
+.login-input > input {
+	color: white;
+	font-size: 0.8rem;
+	font-family: Myriad Pro;
+	background-color: transparent;
+	border: none;
+}
+
+.login-input > input::placeholder {
+	color: #bdbdbd;
+}
+
+.submit-login {
+	width: 100%;
+	background-color: #b0bec5;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.submit-login > input {
+	color: #67767e;
+	border: none;
+	background-color: transparent;
+	padding: 10px 0;
+	width: 100%;
+	font-size: 0.9rem;
+	cursor: pointer;
+	text-align: center;
+}
+
+
+
+/**
+ *	Overview
+**/
+
+.page-overview {
+	
+}
+
+.page-overview .block-main {
+	flex-grow: 1;
+	max-width: 100%;
+}

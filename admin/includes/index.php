@@ -1,0 +1,1 @@
+<?php echo('Admin sub'); var_dump($_GET);?>
