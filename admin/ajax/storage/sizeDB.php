@@ -4,16 +4,14 @@ Autoloader::register();
 
 if (Context::check() !== false) {
 	global $context;
-	if ($context->isConnected()) {
+	if ($context->userConnected()) {
 		echo(Storage::getDBSize());
 	} else {
-		var_dump($_SESSION);
 		echo('403, not connected');
 	}
 	
 } else {
 	echo('403, not connected');
 }
-
 
 ?>

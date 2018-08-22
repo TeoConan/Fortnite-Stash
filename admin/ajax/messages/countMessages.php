@@ -6,7 +6,7 @@ if (Context::check() !== false) {
 	global $context;
 	if ($context->userConnected()) {
 
-		echo(User::countUsersDB());
+		echo(Message::countMessages());
 	} else {
 		echo('403, not connected');
 	}

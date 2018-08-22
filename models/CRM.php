@@ -9,6 +9,11 @@ class CRM {
 		//Menu
 		
 	}
+	
+	//Status site
+	public static function getSiteStatus() {
+		
+	}
 }
 
 ?>

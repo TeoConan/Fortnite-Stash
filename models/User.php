@@ -2,6 +2,8 @@
 
 class User {
 	
+	private $debug;
+	
 	//Data SQL
 	public $id;
 	private $password;
@@ -20,8 +22,8 @@ class User {
 	public $isDeleted;
 	
 	public function __construct($filter = array()) {
-		//var_dump(debug_backtrace());
-		//var_dump($filter);
+
+		$this->debug = new Debug('User');
 		if (sizeof($filter) == 0) {
 			//Empty default
 			$this->isConnected = false;
@@ -36,9 +38,7 @@ class User {
 			$this->profile = false;
 			$this->create = false;
 		} else if (isset($filter['id'])) {
-			//var_dump("Direct connect");
 			$user = $this->getUser($filter['id']);
-			//var_dump($user);
 			$this->defineStrClass($user);
 		} else if (isset($filter['user']) && isset($filter['password'])) {
 			return($this->connect($filter['user'], $filter['password']));
@@ -83,12 +83,18 @@ class User {
 		$user = PDOBridge::getSQL('SELECT id, user, password, name, mail, type, expirate, img_profile, utsCreate, utsUpdate, utsDelete FROM user WHERE user = "' . $user . '" AND password = "' . $password . '"');
 		
 		if (!empty($user) && !empty($user->id)) {
+			
+			if ($user->expirate != -1 && $user->expirate < time()) {
+				return('Compte expiré');
+			}
+			
 			//Redefinition 
 			$this->isConnected = true;
 			
 			$this->defineStrClass($user);
 			
 			$context->setUser($this);
+			$this->debug->Slog('Connect ' . $user->user . ' to ' . $context->site . '');
 			return(true);
 		} else {
 			$output = "Utilisateur ou mot de passe inconnue";
@@ -138,7 +144,69 @@ class User {
 			}
 			
 			return($user);
+		} else {
+			die('No user ID in getUser');
 		}
+	}
+	
+	public static function newUser($data) {
+		var_dump($data);
+		$output = "";
+		
+		$set = array(
+			'user' => false,
+			'password' => false,
+			'name' => 'user',
+			'mail' => '',
+			'type' => false,
+			'expirate' => -1,
+			'img_profile' => ''
+		);
+		
+		foreach($set as $i => $field) {
+			if (!isset($data[$i]) || empty($data[$i])) {
+				if($field === false) {
+					die('Missing data for new user (' . $$i . ')');
+				}
+				
+				$data[$i] = $field;
+				
+				if ($i == 'name') {
+					$data['name'] = $data['user'];
+				}
+			}
+		}
+		
+		if ($data['expirate'] != -1 && !is_numeric($data['expirate'])) {
+			
+			$data['expirate'] = strtotime($data['expirate']);
+			
+			if (!$data['expirate']) {
+				$data['expirate'] = -1;
+				$output = "Mauvais format de date";
+			}
+		}
+		
+		$query = "INSERT INTO `user` (`id`, `user`, `password`, `name`, `mail`, `type`, `expirate`, `img_profile`, `utsCreate`, `utsUpdate`, `utsDelete`) VALUES (NULL, '".$data['user']."', '".$data['password']."', '".$data['name']."', '".$data['mail']."', '".$data['type']."', ".$data['expirate'].", '".$data['img_profile']."', " . time() . ", '0000-00-00 00:00:00.000000', '0000-00-00 00:00:00.000000')";
+		
+		global $context;
+		$context->reconnectDB();
+		$result = PDOBridge::exeSQL($query);
+	}
+	
+	public static function getList(){
+		global $context;
+		
+		$output = PDOBridge::getAllSQL("SELECT * FROM user");
+		return($output);
+	}
+	
+	
+	public static function countUsersDB() {
+		global $context;
+		$context->reconnectDB();
+		$output = PDOBridge::getSQL("SELECT COUNT('id') as size FROM user");
+		return($output->size);
 	}
 }
 

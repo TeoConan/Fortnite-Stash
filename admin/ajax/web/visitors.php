@@ -6,7 +6,8 @@ if (Context::check() !== false) {
 	global $context;
 	if ($context->userConnected()) {
 
-		echo(User::countUsersDB());
+		$visitors = new Setting('Visitors');
+		echo($visitors->getVal());
 	} else {
 		echo('403, not connected');
 	}

@@ -79,3 +79,37 @@
 [2018-08-16 19:30:39] Context : Connect  to DB fnstash
 [2018-08-16 19:32:47] Context : Connect  to DB fnstash
 [2018-08-16 19:34:21] Context : Connect  to DB fnstash
+[2018-08-17 18:14:25] Admin-cache : Cache removed
+[2018-08-17 18:14:30] Cache : Impossible de créé les répertoire de cache pour D:/xampp/htdocs/fortnite-stash.local/cache/images/res/images/skins
+[2018-08-17 18:14:30] Cache : Nouvelle image en cache : stash-logo-bw_64x64.png
+[2018-08-17 18:14:30] Cache : Nouvelle image en cache : 269_50x50.png
+[2018-08-17 18:14:32] Cache : Nouvelle image en cache : 22_300x300.png
+[2018-08-17 18:14:32] Cache : Nouvelle image en cache : 269_300x300.png
+[2018-08-17 18:14:54] Cache : Nouvelle image en cache : 269_50x50.png
+[2018-08-17 18:15:06] Admin-cache : Cache removed
+[2018-08-17 18:15:16] Admin-cache : Cache removed
+[2018-08-17 18:15:42] Cache : Nouvelle image en cache : stash-logo-bw_64x64.png
+[2018-08-17 18:15:42] Cache : Nouvelle image en cache : 269_50x50.png
+[2018-08-17 18:15:43] Cache : Nouvelle image en cache : 22_300x300.png
+[2018-08-17 18:15:43] Cache : Nouvelle image en cache : 269_300x300.png
+[2018-08-18 13:29:37] Cache : Nouvelle image en cache : 22_50x50.png
+[2018-08-18 16:56:37] Cache : Nouvelle image en cache : 755_50x50.png
+[2018-08-18 17:07:57] admin-image : Can't get image D:/xampp/htdocs/fortnite-stash.local/users/755.png
+[2018-08-18 17:08:22] admin-image : Can't get image D:/xampp/htdocs/fortnite-stash.local/users/res/images/profiles/755.png/res/images/profiles
+[2018-08-18 17:42:30] admin-image : Can't get image D:/xampp/htdocs/fortnite-stash.local/overview/res/icons/account.svg/res/icons
+[2018-08-18 18:53:14] Cache : Impossible de trouver le fichier : D:/xampp/htdocs/fortnite-stash.local/res/images/skins/227.png
+[2018-08-18 18:53:14] Cache : Impossible de créé les répertoire de cache pour 
+[2018-08-18 18:54:25] Cache : Nouvelle image en cache : 227_50x50.png
+[2018-08-20 12:33:47] Cache : Nouvelle image en cache : 755_40x40.png
+[2018-08-21 01:01:02] Admin-cache : Cache removed
+[2018-08-21 01:01:11] Cache : Nouvelle image en cache : 269_50x50.png
+[2018-08-21 01:01:14] Admin-cache : Cache removed
+[2018-08-21 01:01:17] Cache : Impossible de créé les répertoire de cache pour D:/xampp/htdocs/fortnite-stash.local/cache/images/res/images/profiles
+[2018-08-21 01:01:17] Cache : Nouvelle image en cache : stash-logo-bw_64x64.png
+[2018-08-21 01:01:17] Cache : Nouvelle image en cache : 755_40x40.png
+[2018-08-21 01:01:18] Cache : Nouvelle image en cache : 269_50x50.png
+[2018-08-21 01:01:18] Cache : Nouvelle image en cache : 269_300x300.png
+[2018-08-21 01:01:18] Cache : Nouvelle image en cache : 22_300x300.png
+[2018-08-21 01:01:24] Cache : Nouvelle image en cache : 755_40x40.png
+[2018-08-21 01:01:26] Cache : Nouvelle image en cache : 755_50x50.png
+[2018-08-22 11:29:25] Cache : Nouvelle image en cache : 227_50x50.png

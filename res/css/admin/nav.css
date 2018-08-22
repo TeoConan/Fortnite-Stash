@@ -64,10 +64,11 @@
 	margin: auto 0;
 	height: 40px;
 	width: 40px;
+	overflow: hidden;
 	display: flex;
 }
 
-.block-header .profile > .picture img {
+.block-header .profile > .picture .default {
 	height: 22px;
 	width: 22px;
 	margin: auto;

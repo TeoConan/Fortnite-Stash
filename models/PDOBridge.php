@@ -48,18 +48,7 @@ class PDOBridge
 	}
 	
 	//Obtenir un array d'objects de la BDD
-	public static function getAllSQL($table, $select, $where = false) {
-		
-		if($select != "*"){
-			$select = "`" . $select . "`";
-		}
-		
-		$query = 'SELECT ' . $select . ' FROM ' . $table . ' ';
-		
-		if($where != false) {
-			$query .= $where;
-		}
-		//echo('<br>Query : ' . $query . ' <br>');
+	public static function getAllSQL($query) {
 		$selector = self::returnSQL($query);
 		$output = array();
 		
@@ -81,11 +70,12 @@ class PDOBridge
 	//Executer en brut une requete select
 	//Retourne le selector PDO
 	public static function returnSQL($query){
-		//var_dump(debug_backtrace());
-		//var_dump(self::$link);
+		global $context;
+		if (!empty($context) && empty(self::$link)) {
+			$context->reconnectDB();
+		}
+		
 		$selector = self::$link->query($query);
-		//$output = $selector->fetch();
-		//$selector->closeCursor();
 		return $selector;
 	}
 	

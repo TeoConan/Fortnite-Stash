@@ -16,24 +16,31 @@ function getItem($item) {
 	return($output);
 }
 
-$list = array(
-	array(
-		'name'	=> 'Raven',
-		'type'	=> 'Outfits',
-		'price'	=> '2 000 V-bucks',
-		'rarity'=> 'Légendraire',
-		'icons'	=> '<img src="/res/icons/calendar.svg"/><img src="/res/icons/track-light.svg"/>',
-		'preview'	=> '/res/images/skins/22.png'
-	),
-	array(
-		'name'	=> 'Raven',
-		'type'	=> 'Outfits',
-		'price'	=> '2 000 V-bucks',
-		'rarity'=> 'Légendraire',
-		'icons'	=> '<img src="/res/icons/calendar.svg"/><img src="/res/icons/track-light.svg"/>',
-		'preview'	=> '/res/images/skins/22.png'
-	)
-);
+$list = array();
+$skins = Skin::getList();
+
+$devises = Devise::getList();
+$types = TypeSkin::getList('trad_fr');
+$rarities = Rarity::getList();
+
+foreach($skins as $skin) {
+	
+	$season = "";
+	if (isset($skin->season)) {
+		$season = ' (S' . $skin->season . ')';
+	}
+	
+	
+	
+	$list[] = array(
+		'name'	=> $skin->name,
+		'type'	=> $types[$skin->type]->trad_fr,
+		'price'	=> $skin->price . ' ' . $devises[$skin->devise] . $season,
+		'rarity'=> $rarities[$skin->rarity]->trad_fr,
+		'icons'	=> "",
+		'preview'	=> '/res/images/skins/' . $skin->img_default,
+	);
+}
 
 $card = array(
 	'icon'		=> "/res/icons/tie.svg",
@@ -123,7 +130,7 @@ $card = array(
 		<input type="text" id="skin-search" placeholder="Rechercher" value=""/>
 	</div>
 	
-	<p class="result mt1" id="nbrResult">201 résultats</p>
+	<p class="result mt1" id="nbrResult"><?php echo(sizeof($list)); ?> résultats</p>
 </div>
 
 <table class="list-skins">
@@ -133,14 +140,5 @@ $card = array(
 			echo(getItem($item));
 		}
 		?>
-		<tr>
-			<td class="name">Raven</td>
-			<td><div class="tag"><p>Outfits</p></div></td>
-			<td>2 000 V-bucks</td>
-			<td><div class="tag"><p>Légendaire</p></div></td>
-			<td><div class="table-separator"></div></td>
-			<td class="shop-icon"><img src="/res/icons/calendar.svg"/><img src="/res/icons/track-light.svg"/></td>
-			<td><div class="preview"><img src="/res/images/skins/22.png"/></div></td>
-		</tr>
 	</tbody>
 </table>

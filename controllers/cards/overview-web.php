@@ -1,16 +1,25 @@
 <?php
 
-$css = '
-	
-';
+$site = new Setting('SiteState');
+$siteStatus = $site->getStatus();
+
+$siteOn = $site->getVal();
+$siteOff = $site->getVal2();
+
+if ($siteStatus) {
+	$siteLabel = $siteOn;
+	$btcolor = 'green';
+} else {
+	$siteLabel = $siteOff;
+	$btcolor = 'red';
+}
+
 
 $card = array(
 	'icon'		=> "/res/icons/web.svg",
 	'name'		=> "Fortnite-Stash.com",
 	'class'		=> "web mba",
 	'title'		=> "Fortnite-Stash.com",
-	'css'		=> $css,
-	
 );
 
 ?>
@@ -44,17 +53,17 @@ $card = array(
 
 
 			<div class="visits">
-				<p class="text big white">12 058</p>
+				<p class="text big white" id="StatVisitors">...</p>
 				<p class="text white">Visites total</p>
 			</div>
 
 			<div class="visits-month">
-				<p class="text big white">6 020</p>
+				<p class="text big white" id="StatMonthVisitors">...</p>
 				<p class="text white">Visites du mois</p>
 			</div>
 
 			<div class="web-switch">
-				<div class="button green">
-					<span>Site On Air</span>
+				<div class="button <?php echo($btcolor); ?>" id="switchSite">
+					<span><?php echo($siteLabel); ?></span>
 				</div>
 			</div>

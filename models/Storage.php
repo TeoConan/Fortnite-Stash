@@ -26,13 +26,23 @@ class Storage {
 		return $size;
 	}
 	
+	public static function countImagesSkins() {
+		
+		$path = Context::RES_SKINS;
+		
+		$files = scandir($path);
+		$files = sizeof($files) - 2;
+		
+		return($files);
+	}
+	
 	public static function convertOctetReadable($size, $postfix = true, $round = false){
 		$postfix = array(
 			'o',
-			'ko',
-			'mo',
-			'go',
-			'to'
+			'Ko',
+			'Mo',
+			'Go',
+			'To'
 		);
 		
 		for ($i = 0; $size > 1024; $i++) {
@@ -54,20 +64,38 @@ class Storage {
 		return($size);
 	}
 	
-	public static function _getDBSize() {
+	public static function delCache() {
+		self::rrmdir(Context::CACHE);
+		mkdir(Context::ROOT . 'cache/');
+		$debug = new Debug('Admin-cache');
+		$debug->log('Cache removed');
+	}
+	
+	public static function rrmdir($dir) { 
+		if (is_dir($dir)) { 
+			$objects = scandir($dir); 
+			foreach ($objects as $object) {
+				if ($object != "." && $object != "..") {
+					if (is_dir($dir."/".$object))
+						self::rrmdir($dir."/".$object);
+					else
+						unlink($dir."/".$object);
+				}
+			}
+			rmdir($dir); 
+		}
+	}
+	
+	public static function getDBSize() {
 		global $context;
-		var_dump($context->getTypeConnect());
-		$context->printContext();
-		
-		// Execute query
+		$context->reconnectDB();
 		$dbl = PDOBridge::getConnexion();
-		var_dump($dbl);
 		$sth = $dbl->query('SHOW TABLE STATUS');
 
-		// Get size from array
 		$size = $sth->fetch(PDO::FETCH_ASSOC)["Data_length"];
+		$size = self::convertOctetReadable($size);
 		
-		var_dump($size);
+		return($size);
 	}
 }
 

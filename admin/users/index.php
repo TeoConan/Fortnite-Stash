@@ -5,14 +5,15 @@ Autoloader::register();
 
 $context = Context::check();
 if ($context === false || !isset($_SESSION['idUser'])) {
-	//header("Location: ./");
-	var_dump($context);
-	var_dump($_SESSION);
+	header("Location: ./");
 }
 
 $context->setCurrentPage('users');
 $user = new User(array('id' =>$_SESSION['idUser']));
 $context->setUser($user);
+
+
+//include("../../controllers/cards/users-add.php");
 
 ?>
 
@@ -23,8 +24,8 @@ $context->setUser($user);
 	<title>Fortnite-Stash - Users</title>
 	<link rel="stylesheet" href="/res/css/admin/style.css"/>
 	<link rel="icon" type="image/png" href="../icon-admin.ico" />
-	<script type="text/javascript" src="res/vendors/jquery.min.js">
-	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body class="page page-skin-manager">

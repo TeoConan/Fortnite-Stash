@@ -14,7 +14,7 @@ class Debug
 	//Session log
 	public function Slog($txt) {
 		$user = strtolower(User::getNameOf(Context::getUserId()));
-		$log = "[SESSION USER " . $user . " | " . date("Y-m-d H:i:s") . "]" . $txt;
+		$log = "[SESSION USER " . $user . " | " . date("Y-m-d H:i:s") . "]" . $txt . "";
 		$this->write($log, Context::ROOT . 'system/logs/sessions/' . $user . '.txt');
 	}
 	

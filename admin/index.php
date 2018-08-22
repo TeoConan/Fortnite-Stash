@@ -54,7 +54,6 @@ if ($var['context']['submit'] === true) {
 
 	$user = new User();
 	$connect = $user->connect($var['user']['input']['user'], $var['user']['input']['password']);
-	var_dump($_SESSION);
 	
 	if ($connect === true) {
 		$var['user']['connected'] = true;
@@ -62,6 +61,10 @@ if ($var['context']['submit'] === true) {
 	} else {
 		$var['messages'][] = array('type' => 'error', 'text' => $connect);
 	}
+}
+
+if (isset($_GET['unconnected'])) {
+	$var['messages'][] = array('type' => 'error', 'text' => "Connectez vous pour accèder au CRM");
 }
 
 switch ($var['context']['page']) {

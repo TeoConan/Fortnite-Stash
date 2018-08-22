@@ -5,8 +5,11 @@ Autoloader::register();
 if (Context::check() !== false) {
 	global $context;
 	if ($context->userConnected()) {
-
-		echo(User::countUsersDB());
+		
+		
+		
+		
+		echo('off');
 	} else {
 		echo('403, not connected');
 	}

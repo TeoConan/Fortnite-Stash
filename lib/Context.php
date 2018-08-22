@@ -9,6 +9,10 @@ class Context {
 	
 	const UTILITIES = "D:/xampp/htdocs/fortnite-stash.local/lib/Utilities/";
 	const IMG_CACHE = "D:/xampp/htdocs/fortnite-stash.local/cache/images/";
+	const CACHE = "D:/xampp/htdocs/fortnite-stash.local/cache/";
+	
+	const RES_SKINS = "D:/xampp/htdocs/fortnite-stash.local/res/images/skins/";
+	const RES_PROFILES = "D:/xampp/htdocs/fortnite-stash.local/res/images/profiles/";
 	
 	private $connected = false;
 	private $user = false;
@@ -74,6 +78,7 @@ class Context {
 	}
 	
 	public function printContext(){
+		var_dump(debug_backtrace());
 		var_dump('connected : ' . $this->connected);
 		var_dump('site : ' . $this->site);
 		var_dump($this->conf);
@@ -108,10 +113,7 @@ class Context {
 				break;
 		}
 		
-		//var_dump(PDOBridge::isConnected());
 		$result = PDOBridge::connectDB($db_host, $connect['user'], $connect['password'], $db_name);
-		$this->debug->Slog('Connect ' . $connect['user'] . ' to DB ' . $db_name);
-		//var_dump(PDOBridge::isConnected());
 		return($result);
 	}
 	
@@ -160,22 +162,43 @@ class Context {
 			}
 		} else {
 			return($_SESSION['idUser']);
+		}	
+	}
+	
+	public function getUser() {
+		if (empty($this->user)) {
+			if (isset($_SESSION['idUser'])) {
+				$this->user = new User(array('id' => $_SESSION['idUser']));
+				return($this->user);
+			}
+		} else {
+			return($this->user);
 		}
-		
-			
 	}
 	
 	public function isConnected(){return($this->connected);}
 	
+	public function userConnected(){		
+		if (isset($_SESSION['idUser'])) {
+			$user = new User(array('id' =>$_SESSION['idUser']));
+			$this->setUser($user);
+		}
+		
+		if (is_numeric($this->user->id)) {
+			return(true);
+		}
+		return(false);
+	}
+	
 	public function getTypeConnect(){return($this->typeDBConnect);}
 
 	public function disconnect(){
+		$this->debug->Slog('Disconnect ' . $_SESSION['idUser'] . ' to ' . $this->site . '');
 		$_SESSION['idUser'] = -1;
 		$this->connected = false;
 		session_destroy();
 		echo('Disconnected');
 		header('Location: ' . self::ADMIN_URL);
-		$this->debug->Slog('Disconnect');
 	}
 	
 	//Vérifier si le context est present
@@ -233,6 +256,8 @@ class Context {
 			return(false);
 		}
 	}
+	
+	
 }
 
 ?>

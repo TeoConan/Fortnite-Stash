@@ -1,3 +1,21 @@
+<?php
+global $context;
+
+$site = new Setting('SiteVersion');
+$crm = new Setting('CRMVersion');
+
+$user = $context->getUser();
+
+$img = "/res/icons/account.svg?color=ffffff";
+$classimg = " default ";
+
+if (!empty($user->profile)) {
+	$img = '/res/images/profiles/' . $user->profile . '?size=40';
+	$classimg = "";
+}
+
+?>
+
 <header class="block-header">
 	<div class="logo-nav">
 		<img src="/res/images/admin/stash-logo-bw.png?size=64"/>
@@ -5,13 +23,13 @@
 	<div class="inner">
 		<div class="titles">
 			<h1>Fortnite-Stash Admin Page</h1>
-			<h2>Version Site FTS-V2.1 | Version CRM V1.0</h2>
+			<h2>Version Site <?php echo($site->getVal()); ?> | Version CRM <?php echo($crm->getVal()); ?></h2>
 		</div>
 
 		<div class="profile">
-			<p class="user">Téo Conan</p>
+			<p class="user"><?php echo($user->name); ?></p>
 			<div class="picture">
-				<img src="/res/icons/account.svg?color=ffffff"/>
+				<img class="<?php echo($classimg); ?>" src="<?php echo($img); ?>"/>
 			</div>
 			<a class="disconnect" onClick="" href="../ajax/disconnect.php">
 				<img src="/res/icons/power.svg?color=444444"/>
@@ -25,7 +43,7 @@
 		<ul class="nav-list">
 
 			<?php 
-			global $context;
+			
 
 			$menu = $context->conf('menu');
 

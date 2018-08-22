@@ -1,8 +1,8 @@
 <?php
 
 $list = array(
-	array("Nombre d'alertes :", "0"),
-	array("Nombre d'erreurs :", "0"),
+	array("Nombre d'alertes :", '<p id="StatAlerts">...</p>'),
+	array("Nombre d'erreurs :", '<p id="StatMessages">...</p>'),
 );
 
 $card = array(
